@@ -48,6 +48,15 @@ numBtns.forEach((btn) => {
             num2 = vPortNums[1]
             if (operator === '+') {
                 vPort.textContent = operate(num1, operator, num2)
+            } else if (operator === '-') {
+                vPort.textContent = operate(num1, operator, num2)
+            } else if (operator === 'x') {
+                operator = '*'
+                vPort.textContent = operate(num1, operator, num2)
+            } else if (operator === '/') {
+                vPort.textContent = operate(num1, operator, num2)
+            } else { // Catch Error
+                alert('ERROR: SOMETHING WENT WRONG')
             }
         })
     } else {
