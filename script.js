@@ -9,7 +9,8 @@ neg2 = false
 const numBtns = document.querySelectorAll('.num button'),
 opBtns = document.querySelectorAll('.ops button'),
 plusBtn = document.querySelector('#add'),
-vPort = document.querySelector('.view')
+vPort = document.querySelector('.view'),
+decBtn = document.querySelector('#dec')
 
 // Operator Functions
 function add(num1, num2) {
@@ -78,6 +79,7 @@ numBtns.forEach((btn) => {
     } else {
         btn.addEventListener('click', () => {
             vPort.textContent += btn.textContent
+            if (btn.id === 'dec') btn.disabled = true;
         })
     }
 })
@@ -93,6 +95,7 @@ opBtns.forEach((btn) => {
             // Disable use a second time -- Only one operation at a time
             // Ternary Operation -- if id = clear || equal then enable button, otherwise disable
             opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
+            decBtn.disabled = false
         })
     } else if (btn.id ==='sub') {
         btn.addEventListener('click', () => {
@@ -102,6 +105,7 @@ opBtns.forEach((btn) => {
 
             // Disable use a second time -- Only one operation at a time
             opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
+            decBtn.disabled = false
         })
     } else if (btn.id === 'mult') {
         btn.addEventListener('click', () => {
@@ -111,6 +115,7 @@ opBtns.forEach((btn) => {
 
             // Disable use a second time -- Only one operation at a time
             opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
+            decBtn.disabled = false
         })
     } else if (btn.id === 'div') {
         btn.addEventListener('click', () => {
@@ -120,10 +125,12 @@ opBtns.forEach((btn) => {
             
             // Disable use a second time -- Only one operation at a time
             opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
+            decBtn.disabled = false
         })
     } else if (btn.id === 'clear') {
         btn.addEventListener('click', () => {
             // Reset -- Unpress buttons / Clear viewport
+            decBtn.disabled = false
             opBtns.forEach((btn) => btn.disabled = false)
             neg1 = false
             neg2 = false
@@ -142,6 +149,7 @@ opBtns.forEach((btn) => {
             neg2 = false
             
             // Unpress buttons
+            decBtn.disabled = false
             opBtns.forEach((btn) => btn.disabled = false)
         })
     }
