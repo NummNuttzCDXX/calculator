@@ -53,6 +53,7 @@ body {
 /* Actual Operator Buttons */
 .ops button {
     width: 60px;
+    background-color: darkorange;
 }
 
 /* Number Button Div */
