@@ -28,29 +28,36 @@ body {
 /* Operator Buttons Div */
 .ops {
     margin-left: auto;
-    height: 405px;
-    width: 50px;
+    margin-top: 5px;
+    height: 430px;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 10px;
+    justify-content: space-evenly;
     align-items: flex-end;
 }
 
 /* Actual Operator Buttons */
 .ops button {
-    width: 50px;
+    width: 60px;
 }
 
 /* Number Button Div */
 .num {
     width: 405px;
+    height: fit-content;
     margin-right: auto;
-
+    
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: space-evenly;
     align-items: center;
+}
+
+/* Actual Number Buttons */
+.num button {
+    margin: 5px;
 }
 
 /* ALL Buttons */
@@ -58,4 +65,14 @@ button {
     width: 100px;
     height: 100px;
     font-size: 20px;
+}
+
+#zero {
+    flex-grow: 1;
+    margin-left: 23px;
+    margin-right: 23px;
+}
+
+#equal {
+    margin-right: 23px;
 }
