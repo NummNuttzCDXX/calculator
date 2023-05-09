@@ -7,7 +7,7 @@ body {
 
 .calculator {
     width: 500px;
-    height: 500px;
+    height: 530px;
     background-color: grey;
 }
 
@@ -16,4 +16,45 @@ body {
     height: 75px;
     background-color: darkgrey;
     font-size: 70px;
+}
+
+/* Div containing ALL Button Divs */
+.buttons {
+    display: flex;
+    margin: 10px;
+    height: 405px;
+}
+
+/* Operator Buttons Div */
+.ops {
+    margin-left: auto;
+    height: 405px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* Actual Operator Buttons */
+.ops button {
+    width: 50px;
+}
+
+/* Number Button Div */
+.num {
+    width: 405px;
+    margin-right: auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/* ALL Buttons */
+button {
+    width: 100px;
+    height: 100px;
 }
