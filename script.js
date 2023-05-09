@@ -134,6 +134,7 @@ opBtns.forEach((btn) => {
             let vPortNums = vPort.textContent.split(operator) // Should be an Array containing the 2 numbers selected
             num2 = vPortNums[1]
             if (operator === 'x') operator = '*';
+            if (num1 == 0 || num2 == 0) return alert('You cant divide by 0 dippy')
             vPort.textContent = Math.round(operate(num1, operator, num2) * 10000) / 10000;
 
             // Check if answer is negative
