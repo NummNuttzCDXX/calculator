@@ -46,7 +46,7 @@ numBtns.forEach((btn) => {
             let vPortNums = vPort.textContent.split(operator) // Should be an Array containing the 2 numbers selected
             num2 = vPortNums[1]
             if (operator === 'x') operator = '*';
-            vPort.textContent = operate(num1, operator, num2)
+            vPort.textContent = Math.round(operate(num1, operator, num2) * 10000) / 10000
             
             // Unpress buttons
             opBtns.forEach((btn) => btn.disabled = false)
