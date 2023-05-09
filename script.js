@@ -10,19 +10,19 @@ vPort = document.querySelector('.view')
 
 // Operator Functions
 function add(num1, num2) {
-    return num1 + num2
+    return Number(num1) + Number(num2)
 }
 
 function sub(num1, num2) {
-    return num1 - num2
+    return Number(num1) - Number(num2)
 }
 
 function mult(num1, num2) {
-    return num1 * num2
+    return Number(num1) * Number(num2)
 }
 
 function divide(num1, num2) {
-    return num1 / num2
+    return Number(num1) / Number(num2)
 }
 
 function operate(num1, operator, num2) {
@@ -31,9 +31,9 @@ function operate(num1, operator, num2) {
     } else if (operator === '-') {
         return sub(num1, num2)
     } else if (operator === '*') {
-        mult(num1, num2) 
+        return mult(num1, num2) 
     } else if (operator === '/') {
-        divide(num1, num2)
+        return divide(num1, num2)
     } else { // Catch Error
         alert('ERROR: INVALID OPERATOR')
     }
@@ -44,7 +44,11 @@ numBtns.forEach((btn) => {
     if (btn.id === 'equal') {
         //TEMP
         btn.addEventListener('click', () => {
-            vPort.textContent += btn.textContent
+            let vPortNums = vPort.textContent.split(operator) // Should be an Array containing the 2 numbers selected
+            num2 = vPortNums[1]
+            if (operator === '+') {
+                vPort.textContent = operate(num1, operator, num2)
+            }
         })
     } else {
         btn.addEventListener('click', () => {
@@ -57,25 +61,25 @@ numBtns.forEach((btn) => {
 opBtns.forEach((btn) => {
     if (btn.id === 'add') {
         btn.addEventListener('click', () => {
-            operator = 'plus'
+            operator = '+'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
         })
     } else if (btn.id ==='sub') {
         btn.addEventListener('click', () => {
-            operator = 'minus'
+            operator = '-'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
         })
     } else if (btn.id === 'mult') {
         btn.addEventListener('click', () => {
-            operator = 'times'
+            operator = 'x'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
         })
     } else if (btn.id === 'div') {
         btn.addEventListener('click', () => {
-            operator = 'divide'
+            operator = '/'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
         })
