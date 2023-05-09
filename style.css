@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    width: 500px;
+    height: 500px;
+    background-color: grey;
+}
+
+.view {
+    width: 500px;
+    height: 75px;
+    background-color: darkgrey;
+    font-size: 70px;
+}
