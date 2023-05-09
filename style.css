@@ -15,7 +15,9 @@ body {
     width: 500px;
     height: 75px;
     background-color: darkgrey;
+
     font-size: 70px;
+    text-align: right;
 }
 
 /* Div containing ALL Button Divs */
@@ -75,6 +77,10 @@ button {
 
 #equal {
     margin-right: 23px;
+}
+
+#clear {
+    background-color: darkred;
 }
 
 /* Placeholder */
