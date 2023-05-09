@@ -48,7 +48,7 @@ body {
     width: 405px;
     height: fit-content;
     margin-right: auto;
-    
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -75,4 +75,9 @@ button {
 
 #equal {
     margin-right: 23px;
+}
+
+/* Placeholder */
+button:disabled:hover {
+    background-color: red;
 }

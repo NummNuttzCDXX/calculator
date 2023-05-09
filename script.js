@@ -42,22 +42,14 @@ function operate(num1, operator, num2) {
 // Event listener to update the viewport when a NUMBER button is pressed
 numBtns.forEach((btn) => {
     if (btn.id === 'equal') {
-        //TEMP
         btn.addEventListener('click', () => {
             let vPortNums = vPort.textContent.split(operator) // Should be an Array containing the 2 numbers selected
             num2 = vPortNums[1]
-            if (operator === '+') {
-                vPort.textContent = operate(num1, operator, num2)
-            } else if (operator === '-') {
-                vPort.textContent = operate(num1, operator, num2)
-            } else if (operator === 'x') {
-                operator = '*'
-                vPort.textContent = operate(num1, operator, num2)
-            } else if (operator === '/') {
-                vPort.textContent = operate(num1, operator, num2)
-            } else { // Catch Error
-                alert('ERROR: SOMETHING WENT WRONG')
-            }
+            if (operator === 'x') operator = '*';
+            vPort.textContent = operate(num1, operator, num2)
+            
+            // Unpress buttons
+            opBtns.forEach((btn) => btn.disabled = false)
         })
     } else {
         btn.addEventListener('click', () => {
@@ -73,28 +65,42 @@ opBtns.forEach((btn) => {
             operator = '+'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
+
+            // Disable use a second time -- Only one operation at a time
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id ==='sub') {
         btn.addEventListener('click', () => {
             operator = '-'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
+
+            // Disable use a second time -- Only one operation at a time
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id === 'mult') {
         btn.addEventListener('click', () => {
             operator = 'x'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
+
+            // Disable use a second time -- Only one operation at a time
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id === 'div') {
         btn.addEventListener('click', () => {
             operator = '/'
             num1 = vPort.textContent
             vPort.textContent += btn.textContent
+            
+            // Disable use a second time -- Only one operation at a time
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id === 'clear') {
         btn.addEventListener('click', () => {
+            // Reset -- Unpress buttons / Clear viewport
+            opBtns.forEach((btn) => btn.disabled = false)
             vPort.textContent = ''
         })
-    } 
+    }
 })
