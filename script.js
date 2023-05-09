@@ -2,10 +2,13 @@
 // Initialize Variables
 let num1,
 num2,
-operator
+operator,
+neg1 = false,
+neg2 = false
 
 const numBtns = document.querySelectorAll('.num button'),
-opBtns = document.querySelectorAll('.ops button')
+opBtns = document.querySelectorAll('.ops button'),
+plusBtn = document.querySelector('#add'),
 vPort = document.querySelector('.view')
 
 // Operator Functions
@@ -41,16 +44,37 @@ function operate(num1, operator, num2) {
 
 // Event listener to update the viewport when a NUMBER button is pressed
 numBtns.forEach((btn) => {
-    if (btn.id === 'equal') {
+    if (btn.id === 'neg') { // Pos/Neg Button
         btn.addEventListener('click', () => {
-            let vPortNums = vPort.textContent.split(operator) // Should be an Array containing the 2 numbers selected
-            num2 = vPortNums[1]
-            if (operator === 'x') operator = '*';
-            vPort.textContent = Math.round(operate(num1, operator, num2) * 10000) / 10000
-            
-            // Unpress buttons
-            opBtns.forEach((btn) => btn.disabled = false)
+            if ((neg1)  && (!vPort.textContent.includes(operator))) { // First number is negative -- Turn it positive
+                vPort.textContent = vPort.textContent.replace('-', '')
+                neg1 = false
+            } else if ((neg1 === false) && (!vPort.textContent.includes(operator))) { // First number is positive AND theres only one number-- Turn it negative
+                newNum1 = '-' + vPort.textContent
+                neg1 = true
+
+                vPort.textContent = newNum1
+            }
+
+            if ((neg2) && (vPort.textContent.includes(operator))) { // Second number is negative -- Turn it positive
+                let vPortNums = vPort.textContent.split(operator)
+                num1 = vPortNums[0]
+                num2 = vPortNums[1]
+                newNum2 = num2.replace('-', '')
+                neg2 = false
+
+                vPort.textContent = vPort.textContent.replace(num2, newNum2)
+            } else if ((neg2 === false) && (vPort.textContent.includes(operator))) { // First is neg AND Second is pos
+                let vPortNums = vPort.textContent.split(operator)
+                num1 = vPortNums[0] 
+                num2 = vPortNums[1]
+                newNum2 = '-' + num2
+                neg2 = true
+
+                vPort.textContent = vPort.textContent.replace(num2, newNum2)
+            }
         })
+    
     } else {
         btn.addEventListener('click', () => {
             vPort.textContent += btn.textContent
@@ -67,7 +91,8 @@ opBtns.forEach((btn) => {
             vPort.textContent += btn.textContent
 
             // Disable use a second time -- Only one operation at a time
-            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
+            // Ternary Operation -- if id = clear || equal then enable button, otherwise disable
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id ==='sub') {
         btn.addEventListener('click', () => {
@@ -76,7 +101,7 @@ opBtns.forEach((btn) => {
             vPort.textContent += btn.textContent
 
             // Disable use a second time -- Only one operation at a time
-            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id === 'mult') {
         btn.addEventListener('click', () => {
@@ -85,7 +110,7 @@ opBtns.forEach((btn) => {
             vPort.textContent += btn.textContent
 
             // Disable use a second time -- Only one operation at a time
-            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id === 'div') {
         btn.addEventListener('click', () => {
@@ -94,13 +119,29 @@ opBtns.forEach((btn) => {
             vPort.textContent += btn.textContent
             
             // Disable use a second time -- Only one operation at a time
-            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.disabled = true)
+            opBtns.forEach((btn) => btn.id ==='clear' ? btn.disabled = false : btn.id === 'equal' ? btn.disabled = false : btn.disabled = true)
         })
     } else if (btn.id === 'clear') {
         btn.addEventListener('click', () => {
             // Reset -- Unpress buttons / Clear viewport
             opBtns.forEach((btn) => btn.disabled = false)
+            neg1 = false
+            neg2 = false
             vPort.textContent = ''
+        })
+    } else if (btn.id === 'equal') {
+        btn.addEventListener('click', () => {
+            let vPortNums = vPort.textContent.split(operator) // Should be an Array containing the 2 numbers selected
+            num2 = vPortNums[1]
+            if (operator === 'x') operator = '*';
+            vPort.textContent = Math.round(operate(num1, operator, num2) * 10000) / 10000;
+
+            // Check if answer is negative
+            (vPort.textContent.includes('-')) ? neg1 = true : neg1 = false;
+            neg2 = false
+            
+            // Unpress buttons
+            opBtns.forEach((btn) => btn.disabled = false)
         })
     }
 })
